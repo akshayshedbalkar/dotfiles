@@ -32,8 +32,8 @@ alias tag="git tag --sort=creatordate | grep -v build"
 alias vi='nvim'
 alias vimdiff='nvim -d'
 alias v='nvim ~/.config/nvim/init.vim'
-alias V='vim ~/.vim/.vimrc'
-alias b='nvim ~/.vim/.bashrc'
+alias V='vim ~/.vim/dotfiles/.vimrc'
+alias b='nvim ~/.vim/dotfiles/.bashrc'
 #Project specific
 alias fpm2='cd ~/docs/fpm2_development'
 alias int='cd ~/docs/Integration'
