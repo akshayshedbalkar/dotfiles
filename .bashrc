@@ -64,7 +64,7 @@ co() {
         return 0
     fi
 
-    branch_list=$(git branch -r | cut --delimiter=/ --fields=1 --complement | grep $1)
+    branch_list=$(git branch -a | grep $1|sed s_remotes\/${2:-origin}\/__|sort -u)
     git switch $branch_list 2>/dev/null
 
     if [ $? -ne 0 ]
