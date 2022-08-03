@@ -69,7 +69,7 @@ co() {
 
     if [ $? -ne 0 ]
     then
-        n=$(echo "$branch_list"| wc -l)
+        n=$(printf "$branch_list"| wc -l)
         if [ $n -eq 1 ]
         then
             echo "Already on desired branch."
