@@ -64,12 +64,12 @@ co() {
         return 0
     fi
 
-    branch_list=$(git branch -a | grep $1 | sed s_remotes\/${2:-origin}\/__ |sed s_\*_\ _ | sort -u)
+    branch_list=$(git branch -a | grep $1 | sed s_remotes\/${2:-origin}\/__ | sed s_\*_\ _ | sort -u)
     git switch $branch_list 2>/dev/null
 
     if [ $? -ne 0 ]
     then
-        n=$(printf "$branch_list"| wc -l)
+        n=$(printf "$branch_list" | wc -l)
         if [ $n -eq 1 ]
         then
             echo "Already on desired branch."
