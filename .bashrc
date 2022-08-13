@@ -64,17 +64,13 @@ co() {
         return 0
     fi
 
-    branch_list=$(git branch -a | grep $1 | sed s_remotes\/${2:-origin}\/__ | sed s_\*_\ _ | sort -u)
+    branch_list=$(git branch -a | grep $1 | sed s_remotes\/${2:-origin}\/__ | sed s_\*_\ _ | grep -v HEAD | sort -u)
     git switch $branch_list 2>/dev/null
 
     if [ $? -ne 0 ]
     then
         n=$(printf "$branch_list" | wc -l)
-        if [ $n -eq 1 ]
-        then
-            echo "Already on desired branch."
-            return 0
-        elif [ $n -eq 0 ]
+        if [ $n -eq 0 ]
         then
             echo "No branch found. Perhaps try git pull --all."
             return 0
