@@ -95,6 +95,11 @@ gpu() {
     git branch --show-current|xargs git push -u origin 
 }
 
+logb() {
+    ticket_number=$(git branch --show-current | grep -o "[0-9]*")
+    git log --all --grep=$ticket_number --pretty=format:'%C(red)%h%Creset %C(auto)%d%Creset %s %C(green)(%ar) %C(bold blue)<%an>%Creset'
+}
+
 delete_branch() {
     git branch -d $1
     git push origin --delete $1
