@@ -4,7 +4,7 @@
 ### Git branch in prompt and autocompletion
 source /usr/share/git/completion/git-prompt.sh
 source /usr/share/git/completion/git-completion.bash
-PS1='\n[\e[1;32m\u@\h\e[m \e[1;34m\W\e[m]\e[1;31m $(__git_ps1)\e[m \$ '
+ PS1='\n[\[\e[1;32m\]\u@\h\[\e[m\] \[\e[1;34m\]\W\[\e[m\]] \[\e[1;31m\]$(__git_ps1)\[\e[m\] \$ '
 
 ### Environment variables
 ## Common
