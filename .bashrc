@@ -14,7 +14,7 @@ export FZF_DEFAULT_COMMAND="rg --files -i"
 export EDITOR="nvim"
 export VISUAL="nvim"
 ## WSL2 specific
-export host_ip=$(grep nameserver /etc/resolv.conf|awk '{print $2}')
+export host_ip=$(awk '/nameserver/ {print $2}' /etc/resolv.conf)
 export http_proxy="http://${host_ip}:3128"
 export https_proxy="http://${host_ip}:3128"
 export all_proxy="http://${host_ip}:3128"
