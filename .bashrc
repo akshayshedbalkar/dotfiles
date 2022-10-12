@@ -102,12 +102,12 @@ logb() {
 
 delete_branch() {
     git branch -d $1
-    git push origin --delete $1
+    git push ${2:-origin} --delete $1
 }
 
 delete_tag() {
     git tag -d $1
-    git push origin --delete $1
+    git push ${2:-origin} --delete $1
 }
 
 delete_submodule() {
