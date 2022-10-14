@@ -53,6 +53,8 @@ set autoread
 set wildmenu
 set visualbell
 set t_vb=
+set fdm=indent
+set fdls=99
 nmap gd <C-]>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
