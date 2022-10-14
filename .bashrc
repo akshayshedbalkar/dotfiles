@@ -86,7 +86,7 @@ co() {
 checkout_all_branches() {
     git branch -r | sed "s_origin/__" > _remotes
     git branch -l > _local
-    grep -Fxvf _local _remotes | while read name; do git checkout $name; done
+    grep -Fxvf _local _remotes | while read name; do git switch $name; done
     rm _local
     rm _remotes
 }
