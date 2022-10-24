@@ -40,79 +40,13 @@ alias int='cd ~/docs/Integration'
 alias desktop='cd /mnt/c/Users/SW5VXVD/Desktop'
 
 ### Functions
-## Common
-path() {
-    echo "${PATH//:/$'\n'}"
-}
+. ~/.vim/bash_scripts/bash_scripts.sh
 
-f() {
-    find . -maxdepth 1 -type f -name "$1" 
-}
 
-ff() {
-    find . -type f -name "$1" 
-}
 
-# Git
-co() {
-    CLEAN=1
-    git diff --exit-code --quiet || CLEAN=0
-    git diff --cached --exit-code --quiet || CLEAN=0
-    if [ $CLEAN -ne 1 ]
-    then
-        echo "Working directory is not clean. See 'git status'. Clean working directory and try again."
-        return 0
-    fi
 
-    branch_list=$(git branch -a | grep $1 | sed s_remotes\/${2:-origin}\/__ | sed s_\*_\ _ | grep -v HEAD | sort -u)
-    git switch $branch_list 2>/dev/null
 
-    if [ $? -ne 0 ]
-    then
-        n=$(printf "$branch_list" | wc -l)
-        if [ $n -eq 0 ]
-        then
-            echo "No branch found. Perhaps try git pull --all."
-            return 0
-        else
-            echo "$branch_list" |awk '{print NR  ":" $0}' 
-            read -p "Enter selection 1-n: " choice
-            selection=$(echo "$branch_list" | awk -v var="$choice" 'NR==var')
-            git switch $selection
-        fi
-    fi
-}
 
-checkout_all_branches() {
-    git branch -r | sed "s_origin/__" > _remotes
-    git branch -l > _local
-    grep -Fxvf _local _remotes | while read name; do git switch $name; done
-    rm _local
-    rm _remotes
-}
 
-gpu() {
-    git branch --show-current|xargs git push -u origin 
-}
 
-logb() {
-    ticket_number=$(git branch --show-current | grep -o "[0-9]*")
-    git log --all --grep=$ticket_number --pretty=format:'%C(red)%h%Creset %C(auto)%d%Creset %s %C(green)(%ar) %C(bold blue)<%an>%Creset'
-}
 
-delete_branch() {
-    git branch -d $1
-    git push ${2:-origin} --delete $1
-}
-
-delete_tag() {
-    git tag -d $1
-    git push ${2:-origin} --delete $1
-}
-
-delete_submodule() {
-    git submodule deinit -f -- $1
-    rm -rf .git/modules/$1
-    git rm -rf $1
-    echo "...Done!"
-}
