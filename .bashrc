@@ -40,13 +40,4 @@ alias int='cd ~/docs/Integration'
 alias desktop='cd /mnt/c/Users/SW5VXVD/Desktop'
 
 ### Functions
-. ~/.vim/bash_scripts/bash_scripts.sh
-
-
-
-
-
-
-
-
-
+. ~/.vim/dotfiles/bash_scripts.sh
