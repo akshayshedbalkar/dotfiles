@@ -52,6 +52,31 @@ fix_iwyu() {
     iwyu-fix-includes --comments --update_comments --nosafe_headers --reorder <${1:-includes.txt}
 }
 
+# Parse A2L measurement pdf
+# First argument: Input pdf file
+extract_a2l()
+{
+    rga -e "Test Case" -e "Pass" -e "Fail" $1|grep -e "FPM" -A 1 >fpm2_measurement.txt
+}
+
+# Apply version to pdx
+apply_version()
+{
+    sed -i "s_swversion=\S\S\S\S_swversion=$1_" hcp5cmd.rb
+    sed -i "/^VwVersion\s=/ s_\"\S\S\S\S\"_\"$1\"_" tools/version/version.rb
+}
+
+# Extract kmatrix from bsw
+kmatrix()
+{
+    cat workspace/domain/config/com/p1_swc_com_config.yaml | grep -Po "V[\d.]*F"|grep -Po "[\d.]*"
+}
+
+unmerged()
+{
+    git branch --no-merged|grep -v "experimental\|prototype\|master\|anlauf_4"
+}
+
 ####################################
 ## Git
 ####################################
